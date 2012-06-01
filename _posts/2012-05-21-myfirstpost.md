@@ -1,10 +1,11 @@
 --- 
 layout: post
-title: "My First Post"
-author: "Author"
-comments: true
+title: "This is a place holder"
+author: "Mark"
+comments: false
 ---
 
 ## Hello world...
 
-This is my first post on the site!
+This is a place holder entry until I write up my first post. Now that I've got
+something setup, I should be more likely to write something up!
