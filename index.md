@@ -9,7 +9,7 @@ title : Home
 		<ul class="postArchive">
 		{% for post in site.posts %}
 			<li>
-				<span class="olderpostdate"> {{ post.date | date: "%e %B, %Y"  }} </span> <a class="postlink" href="{{ post.id }}">{{ post.title }}</a>
+				<span class="postdate"> {{ post.date | date: "%e %B, %Y"  }} </span> <a class="postlink" href="{{ post.id }}">{{ post.title }}</a>
 			</li>
 		{% endfor %}
 		</ul>
