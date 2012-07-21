@@ -14,4 +14,6 @@ Fitness kickboxing has become an important part of my life. I'm not a fighter,
 but I do appreciate the health benefits. It's a fantastic, but very demanding
 workout.
 
+The gnome artwork is courtesy of my beloved girlfriend. <3
+
 Feel free to get in touch. I'd love to hear from you.
