@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Smash Up Deck Generator</title>
+    <meta name="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript">
+    function randomInt(max) {
+      return Math.floor(Math.random() * max);
+    }
+
+    function initialize() {
+      document.forms.gameinfo.elements.numplayers.value = "2";
+    }
+
+    function generateDecks() {
+      var numplayers = parseInt(document.forms.gameinfo.elements.numplayers.value);
+      var factions = getFactions();
+      var decks = document.getElementById("decks");
+      var players = [];
+      var index = 0;
+
+      // reset decks div to blank
+      decks.innerHTML = '';
+
+      // 1st round
+      for(index = 0; index < numplayers; index++) {
+        var rand = randomInt(factions.length);
+        var faction = factions[rand];
+        var player = {
+          name: "Player "+ (index+1),
+          factions: [faction]
+        }
+        players.push(player);
+        factions.splice(rand, 1); // remove from array
+      }
+
+      // 2nd round
+      for(index = numplayers-1; index >= 0; index--) {
+        var rand = randomInt(factions.length);
+        var faction = factions[rand];
+        players[index].factions.push(faction);
+        factions.splice(rand, 1);
+      }
+
+      // display results
+      var h2 = document.createElement("h2");
+      var text = document.createTextNode("Generated Decks");
+      h2.appendChild(text);
+      decks.appendChild(h2);
+
+      for(index = 0; index < numplayers; index++) {
+        var p = document.createElement("p");
+        text = document.createTextNode(players[index].name + ": " + players[index].factions[0] + " and " + players[index].factions[1]);
+        p.appendChild(text);
+        decks.appendChild(p);
+      }
+    }
+
+    function getFactions() {
+      var factions = [
+        "Aliens",
+        "Dinosaurs",
+        "Ninjas",
+        "Pirates",
+        "Robots",
+        "Tricksters",
+        "Wizards",
+        "Zombies"
+      ];
+
+      return factions;
+    }
+    </script>
+  </head>
+  <body onload="initialize()">
+    <h1>Smash Up Deck Generator</h1>
+    <noscript>
+      <p>
+        <strong>Please enable JavaScript or upgrade your browser.</strong>
+      </p>
+    </noscript>
+    
+    <form name="gameinfo">
+      <p>Number of players:
+        <input type="radio" name="numplayers" value="2">2
+        <input type="radio" name="numplayers" value="3">3
+        <input type="radio" name="numplayers" value="4">4
+      </p>
+      <p><input name="submit" type="button" onclick="generateDecks()" value="Submit"></input></p>
+    </form>
+    <div id="decks">
+    </div>
+  </body>
+</html>
