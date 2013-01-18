@@ -3,25 +3,31 @@
   <head>
     <title>Smash Up Deck Generator</title>
     <meta name="Content-Type" content="text/html; charset=UTF-8">
-
+    
+    <script type="text/javascript" src="jquery-1.9.0.min.js"></script>
     <script type="text/javascript">
+    
+    $(document).ready(function() {
+      var radios = $("input:radio[name=numplayers]");
+      
+      if (! radios.is(":checked")) {
+        radios.filter("[value=2]").attr("checked", true);
+      }
+    });
+
     function randomInt(max) {
       return Math.floor(Math.random() * max);
     }
 
-    function initialize() {
-      document.forms.gameinfo.elements.numplayers.value = "2";
-    }
-
     function generateDecks() {
-      var numplayers = parseInt(document.forms.gameinfo.elements.numplayers.value);
+      var numplayers = parseInt($("input:radio[name=numplayers]:checked").val());
       var factions = getFactions();
-      var decks = document.getElementById("decks");
+      var decks = $("#decks");
       var players = [];
       var index = 0;
 
       // reset decks div to blank
-      decks.innerHTML = '';
+      decks.empty();
 
       // 1st round
       for(index = 0; index < numplayers; index++) {
@@ -44,16 +50,10 @@
       }
 
       // display results
-      var h2 = document.createElement("h2");
-      var text = document.createTextNode("Generated Decks");
-      h2.appendChild(text);
-      decks.appendChild(h2);
-
+      decks.append("<h2>Generated Decks</h2>");
+      
       for(index = 0; index < numplayers; index++) {
-        var p = document.createElement("p");
-        text = document.createTextNode(players[index].name + ": " + players[index].factions[0] + " and " + players[index].factions[1]);
-        p.appendChild(text);
-        decks.appendChild(p);
+        decks.append("<p>" + players[index].name + ": " + players[index].factions[0] + " and " + players[index].factions[1] + "</p>");
       }
     }
 
@@ -73,7 +73,7 @@
     }
     </script>
   </head>
-  <body onload="initialize()">
+  <body>
     <h1>Smash Up Deck Generator</h1>
     <noscript>
       <p>
