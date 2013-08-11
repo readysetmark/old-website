@@ -70,6 +70,10 @@
         "Zombies"
       ];
 
+      if($("input:checkbox[name=expansions][value=AwesomeLevel9000]").is(":checked")) {
+        factions = factions.concat(["Killer Plants", "Ghosts", "Steampunks", "Bear Cavalry"]);
+      }
+
       return factions;
     }
     </script>
@@ -88,6 +92,12 @@
         <input type="radio" name="numplayers" value="3">3
         <input type="radio" name="numplayers" value="4">4
       </p>
+
+      <p>Include expansions:</p>
+      <p style="padding-left: 10px;">
+        <input type="checkbox" name="expansions" value="AwesomeLevel9000">Awesome Level 9000
+      </p>
+
       <p><input name="submit" type="button" onclick="generateDecks()" value="Submit"></input></p>
     </form>
     <div id="decks">
